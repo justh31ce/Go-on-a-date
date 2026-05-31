@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Romantic Experience</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    overflow-x:hidden;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#ffd1ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    transition:1s;
+}
+
+body.dark{
+    background:linear-gradient(135deg,#050505,#111,#1a1a1a);
+}
+
+body::before,
+body::after{
+    content:'';
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(100px);
+    z-index:0;
+    animation:floatGlow 12s infinite alternate ease-in-out;
+}
+
+body::before{
+    background:#ff4f8b66;
+    top:-150px;
+    left:-100px;
+}
+
+body::after{
+    background:#8b5cf666;
+    bottom:-150px;
+    right:-100px;
+}
+
+@keyframes floatGlow{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(100px,60px) scale(1.2);
+    }
+}
+
+.container{
+    width:100%;
+    max-width:650px;
+    padding:20px;
+    position:relative;
+    z-index:10;
+}
+
+.card{
+    background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.3);
+    backdrop-filter:blur(20px);
+    border-radius:35px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 15px 50px rgba(0,0,0,0.25);
+    transition:0.6s;
+    animation:fadeUp 0.8s ease;
+    position:relative;
+    overflow:hidden;
+}
+
+body.dark .card{
+    background:rgba(20,20,20,0.55);
+    color:white;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:linear-gradient(45deg,transparent,rgba(255,255,255,0.15),transparent);
+    transform:rotate(45deg);
+    top:-150%;
+    left:-150%;
+    animation:shine 7s infinite;
+}
+
+@keyframes shine{
+    to{
+        top:150%;
+        left:150%;
+    }
+}
+
+.hidden{
+    display:none;
+}
+
+.profile{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid #ff4f8b;
+    box-shadow:0 0 30px #ff4f8b99;
+    margin-bottom:20px;
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.05)}
+    100%{transform:scale(1)}
+}
+
+h1,h2{
+    color:#ff1f75;
+    margin-bottom:15px;
+}
+
+body.dark h1,
+body.dark h2,
+body.dark p,
+body.dark label{
+    color:white;
+}
+
+.subtitle{
+    font-size:18px;
+    line-height:1.8;
+    color:#444;
+    min-height:70px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:25px;
+    flex-wrap:wrap;
+    position:relative;
+}
+
+button{
+    border:none;
+    padding:15px 28px;
+    border-radius:50px;
+    font-size:17px;
+    cursor:pointer;
+    transition:0.35s;
+    font-weight:600;
+}
+
+button:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.yes-btn,
+.confirm-btn,
+.music-btn,
+.dark-btn{
+    background:linear-gradient(45deg,#ff4f8b,#ff7eb3);
+    color:white;
+}
+
+.no-btn{
+    background:white;
+    color:#333;
+}
+
+input,
+select{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:18px;
+    margin-top:8px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.form-group{
+    text-align:left;
+}
+
+.love-meter{
+    width:100%;
+    height:22px;
+    background:#ffffff55;
+    border-radius:30px;
+    overflow:hidden;
+    margin-top:25px;
+}
+
+.fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#ff4f8b,#ffb347);
+    transition:2s;
+}
+
+.countdown-box,
+.details{
+    background:rgba(255,255,255,0.2);
+    padding:20px;
+    border-radius:25px;
+    margin-top:20px;
+}
+
+.countdown{
+    font-size:32px;
+    font-weight:700;
+    margin-top:15px;
+    color:#ff1f75;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-top:25px;
+}
+
+.gallery img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:20px;
+    transition:0.5s;
+}
+
+.gallery img:hover{
+    transform:scale(1.08) rotate(2deg);
+}
+
+.hearts,
+.sparkles,
+.confetti-container{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:2;
+}
+
+.heart,
+.sparkle,
+.confetti{
+    position:absolute;
+}
+
+.heart{
+    animation:floatHeart linear forwards;
+    filter:drop-shadow(0 0 10px pink);
+}
+
+.sparkle{
+    width:8px;
+    height:8px;
+    background:white;
+    border-radius:50%;
+    animation:sparkFade 1s forwards;
+}
+
+.confetti{
+    width:10px;
+    height:10px;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes sparkFade{
+    to{
+        opacity:0;
+        transform:scale(0);
+    }
+}
+
+@keyframes floatHeart{
+    from{
+        transform:translateY(100vh) scale(0.5);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-10vh) scale(1.4);
+        opacity:0;
+    }
+}
+
+@keyframes confettiFall{
+    from{
+        transform:translateY(-100vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(100vh) rotate(720deg);
+    }
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.timeline{
+    margin-top:30px;
+    text-align:left;
+}
+
+.timeline-item{
+    background:rgba(255,255,255,0.15);
+    padding:15px;
+    border-radius:18px;
+    margin-bottom:15px;
+}
+
+@media(max-width:700px){
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    button{
+        width:100%;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="hearts"></div>
+<div class="sparkles"></div>
+<div class="confetti-container"></div>
+
+<div class="container">
+
+<div class="card" id="step1">
+
+<img class="profile"
+src="e:\justheice king\IMG_20240516_112602_2.jpg">
+
+<h1 id="mainTitle">💖 7 DAYS TO WIN MY HEART 💖</h1>
+
+<p class="subtitle" id="typeText"></p>
+
+<div class="timeline-item" style="margin-top:20px;background:rgba(255,255,255,0.2);">
+🏆 Achievement Locked: Future Favorite Person
+</div>
+
+<div class="form-group">
+<label>Your Name 💖</label>
+<input type="text" id="nameInput" placeholder="Enter your name">
+</div>
+
+<div class="buttons">
+
+<button class="yes-btn" onclick="sayYes()">
+YES 💖
+</button>
+
+<button class="no-btn" id="noBtn">
+NO 😅
+</button>
+
+<button class="dark-btn" onclick="toggleDarkMode()">
+🌙 Dark Mode
+</button>
+
+<button class="music-btn" onclick="toggleMusic()">
+🎵 Music
+</button>
+
+</div>
+
+<div class="love-meter">
+<div class="fill" id="loveFill"></div>
+</div>
+
+<audio id="bgMusic" loop>
+<source src="PASTE_YOUR_MP3_LINK_HERE" type="audio/mpeg">
+</audio>
+
+</div>
+
+<div class="card hidden" id="step2">
+
+<h2 id="welcomeText"></h2>
+
+<p>
+Love energy levels are now critically high 💘
+</p>
+
+<button class="confirm-btn" onclick="sendWhatsApp()" style="margin-top:25px;">
+📱 Send Date Confirmation To WhatsApp
+</button>
+
+<div class="timeline">
+<div class="timeline-item">🏆 Achievement Unlocked: Certified Cutie</div>
+<div class="timeline-item">🌞 Monday unlocked</div>
+<div class="timeline-item">🌮 Tuesday unlocked</div>
+<div class="timeline-item">🌌 Wednesday unlocked</div>
+<div class="timeline-item">😈 Thursday unlocked</div>
+<div class="timeline-item">😂 Friday unlocked</div>
+<div class="timeline-item">🥪 Saturday unlocked</div>
+<div class="timeline-item">🌙 Sunday unlocked</div>
+</div>
+
+</div>
+
+<div class="card hidden" id="step3">
+
+<h2>🎮 Romantic Question Adventure</h2>
+
+<div id="questionBox">
+<h2 id="questionTitle">🌞 MONDAY QUESTION</h2>
+<p class="subtitle" id="questionText"></p>
+<div class="buttons" id="answerButtons"></div>
+</div>
+
+<div class="timeline-item" style="margin-top:20px;">
+🦋 Butterfly Level: <span id="butterflyLevel">0%</span>
+</div>
+
+
+<h2>🥪 SATURDAY LUNCH RIDDLE</h2>
+
+<div class="timeline-item">
+I’m warm, cheesy and people fight over the last slice 🍕
+<br><br>
+What am I?
+</div>
+
+<div class="form-group">
+<input type="text" id="riddleAnswer" placeholder="Type your answer here 🍕">
+</div>
+
+<button class="confirm-btn" onclick="checkRiddle()">
+Unlock Date 🍽️
+</button>
+
+<div id="dateSection" class="hidden">
+
+<div class="form-group">
+<label>Select Date</label>
+<input type="date" id="dateInput">
+</div>
+
+<div class="form-group">
+<label>Select Lunch Time</label>
+<select id="timeInput">
+<option value="">Choose Time</option>
+<option>12:00 PM</option>
+<option>1:00 PM</option>
+<option>2:00 PM</option>
+<option>3:00 PM</option>
+</select>
+</div>
+
+<button class="confirm-btn" onclick="confirmDate()">
+Confirm Legendary Lunch Date 💘
+</button>
+
+</div>
+
+</div>
+
+<div class="card hidden" id="step4">
+
+<h2>💖 Date Confirmed 💖</h2>
+
+<div class="details">
+<p><strong>Date:</strong> <span id="finalDate"></span></p>
+<p><strong>Time:</strong> <span id="finalTime"></span></p>
+</div>
+
+<div class="countdown-box">
+<h2>⏳ Until Our Legendary Date...</h2>
+<h2>⏳ Countdown To Our Date</h2>
+<div class="countdown" id="countdown"></div>
+</div>
+
+<div class="gallery">
+<img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=600&auto=format&fit=crop">
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop">
+</div>
+
+<div class="timeline">
+<div class="timeline-item">🌹 Romantic dinner under city lights</div>
+<div class="timeline-item">🎬 Movie night and cuddles</div>
+<div class="timeline-item">🚗 Midnight drive adventure</div>
+<div class="timeline-item">🌅 Watching sunsets together</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const noBtn = document.getElementById('noBtn');
+const heartsContainer = document.querySelector('.hearts');
+const sparklesContainer = document.querySelector('.sparkles');
+const confettiContainer = document.querySelector('.confetti-container');
+const bgMusic = document.getElementById('bgMusic');
+
+const noMessages = [
+    'Please? 🥺',
+    'You can’t escape destiny 💘',
+    'Heartbreak detected 💔',
+    'Love police incoming 🚨',
+    'Illegal levels of cuteness 😭',
+    'This button refuses rejection 😎',
+    'Mission failed successfully 😭'
+];
+
+const questions = [
+    {
+        title:'🌞 MONDAY',
+        question:'What was your first thought when you saw me? 😏',
+        answers:['Cute 😇','Dangerously attractive 😳','Main character energy ✨']
+    },
+    {
+        title:'🌮 TUESDAY',
+        question:'Choose our chaotic lunch combo 🍟',
+        answers:['Pizza & milkshakes 🍕','Fancy pasta 🍝','Burger madness 🍔']
+    },
+    {
+        title:'🌌 WEDNESDAY',
+        question:'Pick our dream romantic universe ✨',
+        answers:['Beach sunset 🌅','Arcade chaos 🎮','Rooftop dinner 🌃']
+    },
+    {
+        title:'😈 THURSDAY',
+        question:'How dangerous is your smile? 😳',
+        answers:['Cute 😇','Deadly 💘','Illegal 😭']
+    },
+    {
+        title:'😂 FRIDAY',
+        question:'If we get lost together what happens first?',
+        answers:['We survive 😎','We panic 😂','We become TikTok famous 🎥']
+    },
+    {
+        title:'🥪 SATURDAY',
+        question:'Solve the lunch riddle below to unlock the date 🍽️',
+        answers:['I am ready 😌']
+    },
+    {
+        title:'🌙 SUNDAY',
+        question:'Ready for the best date of your life? 💖',
+        answers:['ABSOLUTELY 😭','1000% YES 💘','I have been waiting 😎']
+    }
+];
+
+let currentQuestion = 0;
+let butterfly = 0;
+let noIndex = 0;
+
+function typeWriter(element, text, speed = 40){
+
+    let i = 0;
+
+    element.innerHTML = '';
+
+    const interval = setInterval(() => {
+
+        element.innerHTML += text.charAt(i);
+
+        i++;
+
+        if(i >= text.length){
+            clearInterval(interval);
+        }
+
+    }, speed);
+
+}
+
+window.onload = () => {
+
+    typeWriter(
+        document.getElementById('typeText'),
+        'Initializing Love Protocol... 💖 Scanning for cuteness... 100% adorable confirmed 😭'
+    );
+
+    renderQuestion();
+
+};
+
+noBtn.addEventListener('mouseenter', () => {
+
+    noBtn.innerText = noMessages[noIndex];
+
+    noIndex = (noIndex + 1) % noMessages.length;
+
+    const x = Math.random() * (window.innerWidth - 200);
+    const y = Math.random() * (window.innerHeight - 100);
+
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+    noBtn.style.rotate = `${Math.random() * 40 - 20}deg`;
+
+});
+
+function sayYes(){
+
+    navigator.vibrate?.(200);
+
+    document.getElementById('loveFill').style.width = '100%';
+
+    createConfetti();
+
+    const name = document.getElementById('nameInput').value || 'Beautiful';
+
+    localStorage.setItem('romanticName', name);
+
+    document.getElementById('welcomeText').innerHTML = `🥹💖 ${name}, YOU UNLOCKED THE LOVE QUEST?!`;
+
+    document.getElementById('step1').classList.add('hidden');
+
+    document.getElementById('step2').classList.remove('hidden');
+
+    setTimeout(() => {
+
+        document.getElementById('step2').classList.add('hidden');
+
+        document.getElementById('step3').classList.remove('hidden');
+
+    }, 2500);
+
+}
+
+function renderQuestion(){
+
+    const q = questions[currentQuestion];
+
+    if(!q) return;
+
+    document.getElementById('questionTitle').innerHTML = q.title;
+
+    document.getElementById('questionText').innerHTML = q.question;
+
+    const buttons = document.getElementById('answerButtons');
+
+    buttons.innerHTML = '';
+
+    q.answers.forEach(answer => {
+
+        const btn = document.createElement('button');
+
+        btn.className = 'yes-btn';
+
+        btn.innerText = answer;
+
+        btn.onclick = () => nextQuestion();
+
+        buttons.appendChild(btn);
+
+    });
+
+}
+
+function nextQuestion(){
+
+    butterfly += 15;
+
+    document.getElementById('butterflyLevel').innerText = butterfly + '%';
+
+    createConfetti();
+
+    currentQuestion++;
+
+    if(currentQuestion < questions.length){
+
+        renderQuestion();
+
+    }
+
+}
+
+function checkRiddle(){
+
+    const answer = document.getElementById('riddleAnswer').value.toLowerCase();
+
+    if(answer.includes('pizza')){
+
+        createConfetti();
+
+        document.getElementById('dateSection').classList.remove('hidden');
+
+        alert('🍕 Correct! Legendary lunch unlocked 💘');
+
+    }else{
+
+        alert('😭 Wrong answer. The pizza gods are disappointed.');
+
+    }
+
+}
+
+function confirmDate(){
+
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+
+    if(date === '' || time === ''){
+
+        alert('Please select a date and time 💖');
+
+        return;
+
+    }
+
+    document.getElementById('finalDate').innerText = date;
+    document.getElementById('finalTime').innerText = time;
+
+    document.getElementById('step3').classList.add('hidden');
+
+    document.getElementById('step4').classList.remove('hidden');
+
+    startCountdown(date, time);
+
+}
+
+function startCountdown(date, time){
+
+    const targetDate = new Date(`${date} ${time}`).getTime();
+
+    const interval = setInterval(() => {
+
+        const now = new Date().getTime();
+
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').innerHTML =
+        `💖 ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+        if(distance < 0){
+
+            clearInterval(interval);
+
+            document.getElementById('countdown').innerHTML =
+            `💘 IT'S DATE TIME 💘`;
+
+        }
+
+    }, 1000);
+
+}
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle('dark');
+
+}
+
+function toggleMusic(){
+
+    if(bgMusic.paused){
+        bgMusic.play();
+    }else{
+        bgMusic.pause();
+    }
+
+}
+
+setInterval(() => {
+
+    const heart = document.createElement('div');
+
+    heart.classList.add('heart');
+
+    heart.innerHTML = '💖';
+
+    heart.style.left = Math.random() * 100 + 'vw';
+
+    heart.style.fontSize = Math.random() * 25 + 15 + 'px';
+
+    heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 7000);
+
+}, 500);
+
+function createConfetti(){
+
+    for(let i = 0; i < 150; i++){
+
+        const confetti = document.createElement('div');
+
+        confetti.classList.add('confetti');
+
+        confetti.style.left = Math.random() * 100 + 'vw';
+
+        confetti.style.background =
+        `hsl(${Math.random() * 360},100%,50%)`;
+
+        confetti.style.animationDuration =
+        Math.random() * 3 + 2 + 's';
+
+        confettiContainer.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 5000);
+
+    }
+
+}
+
+function sendWhatsApp(){
+
+    // IMPORTANT:
+    // Replace with your REAL WhatsApp number.
+    // Example South Africa: 27831234567
+
+    const yourNumber = '27831234567';
+
+    const savedName = localStorage.getItem('romanticName') || 'Someone Cute';
+
+    const date = document.getElementById('finalDate').innerText;
+
+    const time = document.getElementById('finalTime').innerText;
+
+    const message = encodeURIComponent(
+        `💖 DATE CONFIRMATION 💖
+
+👑 Name: ${savedName}
+📅 Date: ${date}
+⏰ Time: ${time}
+
+🥹 I accepted the legendary lunch date.`
+    );
+
+    // Mobile + Desktop compatible WhatsApp redirect
+    const whatsappURL = `https://api.whatsapp.com/send?phone=${yourNumber}&text=${message}`;
+
+    window.location.href = whatsappURL;
+
+}
+
+// Cursor sparkles
+
+document.addEventListener('mousemove', (e) => {
+
+    const sparkle = document.createElement('div');
+
+    sparkle.classList.add('sparkle');
+
+    sparkle.style.left = e.pageX + 'px';
+    sparkle.style.top = e.pageY + 'px';
+
+    sparklesContainer.appendChild(sparkle);
+
+    setTimeout(() => {
+        sparkle.remove();
+    }, 1000);
+
+});
+
+</script>
+
+</body>
+</html>
+
