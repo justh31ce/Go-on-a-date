@@ -23,12 +23,12 @@ const questions = [
     {
         title:'🌮 TUESDAY',
         question:'Choose our chaotic lunch combo 🍟',
-        answers:['Pizza & milkshakes 🍕','Fancy pasta 🍝','Burger madness 🍔']
+        answers:['Pizza & milkshakes 🍕','Fancy pasta 🍝','Burger madness 🍔','Kota Madness']
     },
     {
         title:'🌌 WEDNESDAY',
         question:'Pick our dream romantic universe ✨',
-        answers:['Beach sunset 🌅','Arcade chaos 🎮','Rooftop dinner 🌃']
+        answers:['Picnic on a sunset 🌅','Arcade chaos 🎮','Rootop dinner 🌃']
     },
     {
         title:'😈 THURSDAY',
@@ -327,7 +327,7 @@ function sendWhatsApp(){
     // Replace with your REAL WhatsApp number.
     // Example South Africa: 27831234567
 
-    const yourNumber = '27831234567';
+    const yourNumber = '27670535880';
 
     const savedName = localStorage.getItem('romanticName') || 'Someone Cute';
 
